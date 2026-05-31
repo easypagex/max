@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAX MATEO — Freelancer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sun: #FFD700;
+    --sky: #1AABF0;
+    --earth: #3DBE6E;
+    --terracotta: #E85D26;
+    --night: #0D1B2A;
+    --cream: #FFF8EE;
+    --sand: #F5E6C8;
+    --leaf: #2E8B57;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--night);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0D1B2A 0%, #0e3356 40%, #1a6a3f 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* animated blobs */
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(61,190,110,0.18) 0%, transparent 70%);
+    top: -200px; left: -200px;
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,215,0,0.12) 0%, transparent 70%);
+    bottom: -150px; right: -150px;
+    animation: drift 15s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes drift {
+    from { transform: translate(0,0) scale(1); }
+    to   { transform: translate(60px, 40px) scale(1.1); }
+  }
+
+  .logo-wrap {
+    position: relative; z-index:2;
+    margin-bottom: 10px;
+  }
+  .logo-circle {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sun), var(--terracotta));
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3.5rem;
+    color: var(--night);
+    box-shadow: 0 0 40px rgba(255,215,0,0.5);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 40px rgba(255,215,0,0.5); }
+    50%      { box-shadow: 0 0 70px rgba(255,215,0,0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    letter-spacing: 6px;
+    line-height: 0.95;
+    position: relative; z-index:2;
+    background: linear-gradient(90deg, var(--sun) 0%, #fff 50%, var(--earth) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero .tagline {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin: 12px 0 30px;
+    position: relative; z-index:2;
+  }
+
+  .lang-btns {
+    display: flex; gap: 12px; margin-bottom: 36px; position: relative; z-index:2;
+  }
+  .lang-btn {
+    padding: 6px 20px;
+    border-radius: 50px;
+    border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.08);
+    color: var(--cream);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .lang-btn:hover, .lang-btn.active {
+    background: var(--sun);
+    border-color: var(--sun);
+    color: var(--night);
+  }
+
+  /* ── SERVICES ── */
+  .section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 80px; height: 4px;
+    background: linear-gradient(90deg, var(--sun), var(--terracotta));
+    border-radius: 2px;
+    margin: 12px auto 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+  }
+
+  .service-card {
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-decoration: none;
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s;
+    display: block;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: inherit;
+    filter: brightness(1.15);
+    opacity: 0;
+    transition: opacity 0.35s;
+    border-radius: inherit;
+  }
+  .service-card:hover { transform: translateY(-8px) scale(1.02); }
+  .service-card:hover::before { opacity: 1; }
+  .service-card:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+
+  .card-garden {
+    background: linear-gradient(145deg, #1a5c35, #2e8b57, #3dbf6e);
+  }
+  .card-handyman {
+    background: linear-gradient(145deg, #7b3200, #c44d1b, #e85d26);
+  }
+  .card-it {
+    background: linear-gradient(145deg, #0a3a6e, #1572b6, #1aabf0);
+  }
+
+  .card-emoji { font-size: 3rem; margin-bottom: 14px; display: block; }
+  .card-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    position: relative; z-index: 1;
+  }
+  .card-sub {
+    font-size: 0.95rem;
+    opacity: 0.88;
+    line-height: 1.5;
+    position: relative; z-index: 1;
+  }
+  .card-badge {
+    display: inline-block;
+    margin-top: 16px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 4px 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  /* ── STRIP BANNER ── */
+  .strip {
+    background: var(--sun);
+    color: var(--night);
+    padding: 18px 24px;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    overflow: hidden;
+  }
+  .strip span { display: inline-block; animation: marquee 18s linear infinite; white-space: nowrap; }
+  @keyframes marquee {
+    from { transform: translateX(30vw); }
+    to   { transform: translateX(-100%); }
+  }
+
+  /* ── REVIEWS ── */
+  .reviews-section {
+    background: linear-gradient(135deg, #0f2d1a 0%, #0a1e2e 100%);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .review-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(90deg, #1877F2, #3b9df8);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 16px 36px;
+    border-radius: 50px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 8px 30px rgba(24,119,242,0.5);
+    margin-top: 20px;
+  }
+  .review-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(24,119,242,0.7); }
+
+  /* ── INFO ── */
+  .info-section {
+    background: #111e2c;
+    padding: 80px 24px;
+  }
+  .info-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .info-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+  }
+  .info-icon { font-size: 2.2rem; margin-bottom: 10px; }
+  .info-label {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sky);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .info-value {
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--cream);
+  }
+  .info-value a {
+    color: var(--sun);
+    text-decoration: none;
+  }
+  .info-value a:hover { text-decoration: underline; }
+
+  /* ── LANGUAGES ── */
+  .langs-row {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 8px;
+  }
+  .lang-pill {
+    background: linear-gradient(135deg, var(--earth), var(--sky));
+    color: var(--night);
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    padding: 4px 14px;
+    border-radius: 50px;
+  }
+
+  /* ── CONTACT / CTA ── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--terracotta) 0%, #c41f6e 100%);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+  }
+  .cta-section p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 36px; }
+
+  .contact-btns {
+    display: flex; flex-wrap: wrap; gap: 18px; justify-content: center;
+  }
+  .btn-wa {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 16px 36px;
+    border-radius: 50px;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(37,211,102,0.7); }
+
+  .btn-fb {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #1877F2;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 16px 36px;
+    border-radius: 50px;
+    box-shadow: 0 8px 30px rgba(24,119,242,0.5);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .btn-fb:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(24,119,242,0.7); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080f18;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+  }
+  footer span { color: var(--sun); }
+
+  /* ── FLOATING WA ── */
+  .float-wa {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    width: 62px; height: 62px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.6);
+    text-decoration: none;
+    z-index: 999;
+    animation: bouncein 1s ease 1s both;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .float-wa:hover { transform: scale(1.1); box-shadow: 0 10px 36px rgba(37,211,102,0.8); }
+  @keyframes bouncein {
+    from { opacity:0; transform: scale(0); }
+    70%  { transform: scale(1.15); }
+    to   { opacity:1; transform: scale(1); }
+  }
+
+  /* entrance animations */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- FLOATING WHATSAPP -->
+<a class="float-wa" href="https://wa.me/34651104100" target="_blank" title="WhatsApp Max">💬</a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="logo-wrap">
+    <div class="logo-circle">MM</div>
+  </div>
+  <h1>Max Mateo</h1>
+  <p class="tagline">Freelancer · Almería, Spain</p>
+  <div class="lang-btns">
+    <a href="https://max.sim24.org/" class="lang-btn active">🇬🇧 English</a>
+    <a href="https://max-sim24-org.translate.goog/?_x_tr_sch=http&_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" class="lang-btn">🇪🇸 Español</a>
+  </div>
+  <p style="font-size:1.1rem; max-width:520px; line-height:1.7; opacity:0.85; position:relative;z-index:2;">
+    Hi, my name is <strong>Max</strong> — I offer quality services at the <strong style="color:var(--sun)">lowest prices</strong>.
+  </p>
+</section>
+
+<!-- MARQUEE STRIP -->
+<div class="strip">
+  <span>🌳 Gardening &nbsp;·&nbsp; 🛠 Handyman &nbsp;·&nbsp; 💻 IT &amp; Web &nbsp;·&nbsp; 📍 Almería Province &amp; Worldwide &nbsp;·&nbsp; ☎ (+34) 651 104 100 &nbsp;·&nbsp; 🌳 Gardening &nbsp;·&nbsp; 🛠 Handyman &nbsp;·&nbsp; 💻 IT &amp; Web &nbsp;·&nbsp; 📍 Almería Province &amp; Worldwide</span>
+</div>
+
+<!-- SERVICES -->
+<div class="section fade-up">
+  <h2 class="section-title">Services</h2>
+  <div class="services-grid">
+
+    <a href="https://max.sim24.org/gardener/" class="service-card card-garden">
+      <span class="card-emoji">🌳</span>
+      <div class="card-title">Gardening</div>
+      <p class="card-sub">Your professional gardener — planting, pruning, landscaping, maintenance and more. 🌴 🌵 🌱 🌷</p>
+      <span class="card-badge">Book now →</span>
+    </a>
+
+    <a href="#" class="service-card card-handyman">
+      <span class="card-emoji">🛠</span>
+      <div class="card-title">Handyman</div>
+      <p class="card-sub">Property maintenance, repairs, and general handyman work. 👷 🪚 🔧</p>
+      <span class="card-badge">Book now →</span>
+    </a>
+
+    <a href="https://max.sim24.org/it/" class="service-card card-it">
+      <span class="card-emoji">💻</span>
+      <div class="card-title">IT &amp; Web</div>
+      <p class="card-sub">Website programming, computer help, remote IT support worldwide. 🌐 🧑‍💻 📡</p>
+      <span class="card-badge">Local &amp; Remote →</span>
+    </a>
+
+  </div>
+  <p style="text-align:center; margin-top:28px; opacity:0.6; font-size:0.9rem;">
+    🌐 Services marked with a globe icon are available <strong>locally and remotely worldwide</strong> via Internet.
+  </p>
+</div>
+
+<!-- REVIEWS -->
+<div class="reviews-section fade-up">
+  <h2 class="section-title" style="color:var(--cream);">Customer Reviews</h2>
+  <p style="opacity:0.8; margin-bottom:8px; font-size:1.05rem;">See what clients are saying about Max's work.</p>
+  <a href="https://www.facebook.com/max7mateo/posts/pfbid035cdjHjaPasGtLanA7oE6shHrSt2Q5yjtL7sbDSkakTGU6AZkiiFkNdWWU5VUov5Ul" class="review-btn" target="_blank">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    Read Reviews on Facebook
+  </a>
+</div>
+
+<!-- INFO CARDS -->
+<div class="info-section fade-up">
+  <div style="max-width:900px; margin:0 auto;">
+    <h2 class="section-title">About Max</h2>
+  </div>
+  <div class="info-grid">
+
+    <div class="info-card">
+      <div class="info-icon">📍</div>
+      <div class="info-label">Service Area</div>
+      <div class="info-value">Almería Province, Spain<br><em style="opacity:.7;">+ Worldwide Remotely</em></div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">🗣️</div>
+      <div class="info-label">Languages</div>
+      <div class="info-value">
+        <div class="langs-row">
+          <span class="lang-pill">🇬🇧 English</span>
+          <span class="lang-pill">🇪🇸 Español</span>
+          <span class="lang-pill">🇭🇷 Croatian</span>
+          <span class="lang-pill">🇷🇸 Serbian</span>
+          <span class="lang-pill">🇷🇺 Russian</span>
+          <span class="lang-pill">🇺🇦 Ukrainian</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">💳</div>
+      <div class="info-label">Payments</div>
+      <div class="info-value">Cash · Bank Transfer<br><em style="opacity:.7;">Invoices &amp; receipts provided</em><br><small style="opacity:.55;">Tax ID: 08143701364</small></div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">💬</div>
+      <div class="info-label">WhatsApp</div>
+      <div class="info-value"><a href="https://wa.me/34651104100">(+34) 651 104 100</a></div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">📘</div>
+      <div class="info-label">Facebook</div>
+      <div class="info-value"><a href="https://facebook.com/max7mateo" target="_blank">facebook.com/max7mateo</a></div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">⭐</div>
+      <div class="info-label">Pricing</div>
+      <div class="info-value">All services at the <strong style="color:var(--sun)">lowest prices</strong></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section fade-up">
+  <h2>Get In Touch</h2>
+  <p>Ready to hire Max? Reach out via WhatsApp or Facebook — fast response guaranteed.</p>
+  <div class="contact-btns">
+    <a class="btn-wa" href="https://wa.me/34651104100" target="_blank">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp (+34) 651 104 100
+    </a>
+    <a class="btn-fb" href="https://facebook.com/max7mateo" target="_blank">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      facebook.com/max7mateo
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Max Mateo</span> — Freelancer · Almería, Spain &nbsp;|&nbsp; Tax ID: 08143701364</p>
+  <p style="margin-top:6px;">Have a good day! ☀️</p>
+</footer>
+
+<script>
+  // Scroll-triggered fade-ups
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
